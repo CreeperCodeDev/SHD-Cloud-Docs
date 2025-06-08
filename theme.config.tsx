@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import React from 'react'
 import { DocsThemeConfig } from 'nextra-theme-docs'
 
@@ -13,13 +12,15 @@ const config: DocsThemeConfig = {
   docsRepositoryBase:
     'https://github.com/SHD-Development/SHD-Cloud-Docs/tree/main',
   useNextSeoProps() {
-    const { asPath } = useRouter()
-    if (asPath == '/')
-      return {
-        titleTemplate: 'SHD Cloud 文檔'
+    return ({ route }) => {
+      if (route === '/') {
+        return {
+          titleTemplate: 'SHD Cloud 文檔'
+        }
       }
-    return {
-      titleTemplate: '%s – SHD Cloud'
+      return {
+        titleTemplate: '%s – SHD Cloud'
+      }
     }
   },
   head: (
@@ -28,14 +29,6 @@ const config: DocsThemeConfig = {
       <meta name="description" content="SHD Cloud 官方文檔" />
     </>
   ),
-  /*banner: {
-		key: "2.0-release",
-		text: (
-			<a href="https://nextra.site" target="_blank">
-				🎉 Nextra 2.0 is released. Read more →
-			</a>
-		),
-	},*/
   search: {
     placeholder: '在此搜尋...'
   },
